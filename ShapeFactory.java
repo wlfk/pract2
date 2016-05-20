@@ -19,8 +19,9 @@ public class ShapeFactory {
     public int width = 25;
     public int height = 25;
 
-    public ShapeFactory(int shape_type) {
-        switch (shape_type / 10) {
+    public ShapeFactory(int n) {
+        n = 3;
+        switch (3) {
             case 1: {
                 this.shape = ShapeFactory.createStar(3, new Point(0, 0), (double)this.width / 2.0, (double)this.width / 2.0);
                 break;
@@ -34,13 +35,13 @@ public class ShapeFactory {
                 break;
             }
             case 7: {
-                GeneralPath path = new GeneralPath();
-                double tmp_height = Math.sqrt(2.0) / 2.0 * (double)this.height;
-                path.moveTo((double)((- this.width) / 2), - tmp_height);
-                path.lineTo(0.0, - tmp_height);
-                path.lineTo((double)(this.width / 2), tmp_height);
-                path.closePath();
-                this.shape = path;
+                GeneralPath generalPath = new GeneralPath();
+                double d = Math.sqrt(2.0) / 2.0 * (double)this.height;
+                generalPath.moveTo((double)((- this.width) / 2), - d);
+                generalPath.lineTo(0.0, - d);
+                generalPath.lineTo((double)(this.width / 2), d);
+                generalPath.closePath();
+                this.shape = generalPath;
                 break;
             }
             case 9: {
@@ -51,7 +52,8 @@ public class ShapeFactory {
                 throw new Error("type is nusupported");
             }
         }
-        switch (shape_type % 10) {
+        n = 7;
+        switch (7) {
             case 1: {
                 this.stroke = new BasicStroke(3.0f);
                 break;
@@ -77,22 +79,20 @@ public class ShapeFactory {
         }
     }
 
-    private static Shape createStar(int arms, Point center, double rOuter, double rInner) {
-        double angle = 3.141592653589793 / (double)arms;
-        GeneralPath path = new GeneralPath();
-        int i = 0;
-        while (i < 2 * arms) {
-            double r = (i & 1) == 0 ? rOuter : rInner;
-            Point2D.Double p = new Point2D.Double((double)center.x + Math.cos((double)i * angle) * r, (double)center.y + Math.sin((double)i * angle) * r);
+    private static Shape createStar(int n, Point point, double d, double d2) {
+        double d3 = 3.141592653589793 / (double)n;
+        GeneralPath generalPath = new GeneralPath();
+        for (int i = 0; i < 2 * n; ++i) {
+            double d4 = (i & 1) == 0 ? d : d2;
+            Point2D.Double double_ = new Point2D.Double((double)point.x + Math.cos((double)i * d3) * d4, (double)point.y + Math.sin((double)i * d3) * d4);
             if (i == 0) {
-                path.moveTo(p.getX(), p.getY());
-            } else {
-                path.lineTo(p.getX(), p.getY());
+                generalPath.moveTo(double_.getX(), double_.getY());
+                continue;
             }
-            ++i;
+            generalPath.lineTo(double_.getX(), double_.getY());
         }
-        path.closePath();
-        return path;
+        generalPath.closePath();
+        return generalPath;
     }
 }
 

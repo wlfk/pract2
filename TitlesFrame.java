@@ -19,13 +19,13 @@ extends JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] arrstring) {
         SwingUtilities.invokeLater(new Runnable(){
 
             @Override
             public void run() {
-                TitlesFrame ps = new TitlesFrame();
-                ps.setVisible(true);
+                TitlesFrame titlesFrame = new TitlesFrame();
+                titlesFrame.setVisible(true);
             }
         });
     }

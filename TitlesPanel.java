@@ -25,56 +25,56 @@ implements ActionListener {
     private int start_angle = 0;
     private int shape;
 
-    public TitlesPanel(int _shape) {
-        this.shape = _shape;
+    public TitlesPanel(int n) {
+        this.shape = n;
         this.animation = new Timer(50, this);
         this.animation.setInitialDelay(50);
         this.animation.start();
     }
 
     @Override
-    public void actionPerformed(ActionEvent arg0) {
+    public void actionPerformed(ActionEvent actionEvent) {
         if (this.is_done) {
             this.repaint();
         }
     }
 
-    private void doDrawing(Graphics g) {
+    private void doDrawing(Graphics graphics) {
         this.is_done = false;
-        this.g2d = (Graphics2D)g;
+        this.g2d = (Graphics2D)graphics;
         this.g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Dimension size = this.getSize();
+        Dimension dimension = this.getSize();
         Insets insets = this.getInsets();
-        int w = size.width - insets.left - insets.right;
-        int h = size.height - insets.top - insets.bottom;
-        ShapeFactory shape = new ShapeFactory(this.shape);
-        this.g2d.setStroke(shape.stroke);
-        this.g2d.setPaint(shape.paint);
-        double angle = this.start_angle++;
+        int n = dimension.width - insets.left - insets.right;
+        int n2 = dimension.height - insets.top - insets.bottom;
+        ShapeFactory shapeFactory = new ShapeFactory(this.shape);
+        this.g2d.setStroke(shapeFactory.stroke);
+        this.g2d.setPaint(shapeFactory.paint);
+        double d = this.start_angle++;
         if (this.start_angle > 360) {
             this.start_angle = 0;
         }
-        double dr = 90.0 / ((double)w / ((double)shape.width * 1.5));
-        int j = shape.height;
-        while (j < h) {
-            int i = shape.width;
-            while (i < w) {
-                angle = angle > 360.0 ? 0.0 : angle + dr;
-                AffineTransform transform = new AffineTransform();
-                transform.translate(i, j);
-                transform.rotate(Math.toRadians(angle));
-                this.g2d.draw(transform.createTransformedShape(shape.shape));
-                i = (int)((double)i + (double)shape.width * 1.5);
+        double d2 = 90.0 / ((double)n / ((double)shapeFactory.width * 1.5));
+        int n3 = shapeFactory.height;
+        while (n3 < n2) {
+            int n4 = shapeFactory.width;
+            while (n4 < n) {
+                d = d > 360.0 ? 0.0 : d + d2;
+                AffineTransform affineTransform = new AffineTransform();
+                affineTransform.translate(n4, n3);
+                affineTransform.rotate(Math.toRadians(d));
+                this.g2d.draw(affineTransform.createTransformedShape(shapeFactory.shape));
+                n4 = (int)((double)n4 + (double)shapeFactory.width * 1.5);
             }
-            j = (int)((double)j + (double)shape.height * 1.5);
+            n3 = (int)((double)n3 + (double)shapeFactory.height * 1.5);
         }
         this.is_done = true;
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        this.doDrawing(g);
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        this.doDrawing(graphics);
     }
 }
 

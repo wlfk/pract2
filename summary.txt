@@ -1,2 +1,2 @@
-Summary for /www/javadecompilers/app/public/data/20.05.16/df35b3ff5254fa20b54eeeb3f4b16823/lab3.jar
+Summary for /www/javadecompilers/app/public/data/20.05.16/df35b3ff5254fa20b54eeeb3f4b16823/lab3fixed.jar
 Decompiled with CFR 0_114
